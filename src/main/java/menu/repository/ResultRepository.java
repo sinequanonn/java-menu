@@ -12,4 +12,8 @@ public class ResultRepository {
     public void saveCoaches(List<Coach> coaches) {
         this.coaches = coaches;
     }
+
+    public List<Coach> findAllCoaches() {
+        return coaches;
+    }
 }

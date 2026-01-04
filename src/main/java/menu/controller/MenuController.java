@@ -1,9 +1,11 @@
 package menu.controller;
 
+import menu.domain.Coach;
 import menu.service.MenuService;
 import menu.view.InputView;
 import menu.view.OutputView;
 
+import java.util.List;
 import java.util.function.Supplier;
 
 public class MenuController {
@@ -22,6 +24,25 @@ public class MenuController {
         outputView.printStartMessage();
 
         inputCoachNames();
+        inputCoachBannedMenus();
+    }
+
+    private void inputCoachBannedMenus() {
+        List<Coach> coaches = menuService.findAllCoaches();
+        for (Coach coach : coaches) {
+            inputCoachBannedMenu(coach);
+        }
+    }
+
+    private void inputCoachBannedMenu(Coach coach) {
+        while (true) {
+            try {
+                String input = inputView.inputCoachBannedMenu(coach.getName());
+                return;
+            } catch (IllegalArgumentException exception) {
+                outputView.printError(exception.getMessage());
+            }
+        }
     }
 
     public void inputCoachNames() {
