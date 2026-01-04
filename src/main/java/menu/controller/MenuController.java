@@ -29,8 +29,10 @@ public class MenuController {
     }
 
     private void processMenuRecommendation() {
-        String category = generateRandomCategory();
-        recommendMenu(category);
+        for (int i = 0; i < 5; i++) {
+            String category = generateRandomCategory();
+            recommendMenu(category);
+        }
     }
 
     private void recommendMenu(String category) {
