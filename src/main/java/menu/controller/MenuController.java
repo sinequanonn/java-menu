@@ -4,6 +4,8 @@ import menu.service.MenuService;
 import menu.view.InputView;
 import menu.view.OutputView;
 
+import java.util.function.Supplier;
+
 public class MenuController {
     private final InputView inputView;
     private final OutputView outputView;
@@ -17,5 +19,30 @@ public class MenuController {
 
     public void run() {
         menuService.initMenus();
+        outputView.printStartMessage();
+
+        inputCoachNames();
+    }
+
+    public void inputCoachNames() {
+        while (true) {
+            try {
+                String coaches = inputView.inputCoachNames();
+                MenuService.saveCoaches(coaches);
+                return;
+            } catch (IllegalArgumentException exception) {
+                outputView.printError(exception.getMessage());
+            }
+        }
+    }
+
+    private <T> T execute(Supplier<T> input) {
+        while (true) {
+            try {
+                return input.get();
+            } catch (IllegalArgumentException exception) {
+                outputView.printError(exception.getMessage());
+            }
+        }
     }
 }

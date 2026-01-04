@@ -14,6 +14,10 @@ public class MenuService {
         this.menuRepository = menuRepository;
     }
 
+    public static void saveCoaches(String input) {
+
+    }
+
     public void initMenus() {
         menuRepository.saveMenus(categories.get(0), List.of("규동", "우동", "미소시루", "스시", "가츠동", "오니기리", "하이라이스", "라멘", "오코노미야끼"));
         menuRepository.saveMenus(categories.get(1), List.of("김밥", "김치찌개", "쌈밥", "된장찌개", "비빔밥", "칼국수", "불고기", "떡볶이", "제육볶음"));
