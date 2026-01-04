@@ -16,6 +16,6 @@ public class MenuController {
     }
 
     public void run() {
-
+        menuService.initMenus();
     }
 }
