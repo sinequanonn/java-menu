@@ -75,4 +75,15 @@ public class MenuService {
     public void saveCategory(String category) {
         resultRepository.addCategory(category);
     }
+
+    public void recommendMenu(Coach coach, String category) {
+        List<String> menus = menuRepository.findMenuByCategory(category);
+        while (true) {
+            String recommendedMenu = generator.generateMenu(menus);
+            if (!coach.isBanned(recommendedMenu) && !coach.isRecommend(recommendedMenu)) {
+                coach.addRecommendMenu(recommendedMenu);
+                break;
+            }
+        }
+    }
 }

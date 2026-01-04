@@ -23,14 +23,21 @@ public class MenuController {
         menuService.initMenus();
         outputView.printStartMessage();
 
-        inputCoachNames();
-        inputCoachBannedMenus();
+        saveCoachNames();
+        saveCoachBannedMenus();
         processMenuRecommendation();
     }
 
     private void processMenuRecommendation() {
         String category = generateRandomCategory();
+        recommendMenu(category);
+    }
 
+    private void recommendMenu(String category) {
+        List<Coach> coaches = menuService.findAllCoaches();
+        for (Coach coach : coaches) {
+            menuService.recommendMenu(coach, category);
+        }
     }
 
     private String generateRandomCategory() {
@@ -45,7 +52,7 @@ public class MenuController {
         }
     }
 
-    private void inputCoachBannedMenus() {
+    private void saveCoachBannedMenus() {
         List<Coach> coaches = menuService.findAllCoaches();
         for (Coach coach : coaches) {
             inputCoachBannedMenu(coach);
@@ -64,7 +71,7 @@ public class MenuController {
         }
     }
 
-    public void inputCoachNames() {
+    public void saveCoachNames() {
         while (true) {
             try {
                 String coaches = inputView.inputCoachNames();

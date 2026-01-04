@@ -19,4 +19,8 @@ public class MenuRepository {
         }
         return false;
     }
+
+    public List<String> findMenuByCategory(String category) {
+        return menuMap.get(category);
+    }
 }

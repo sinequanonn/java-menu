@@ -31,4 +31,16 @@ public class Coach {
     public void addBannedMenu(String name) {
         bannedMenus.add(name);
     }
+
+    public void addRecommendMenu(String menu) {
+        recommendedMenus.add(menu);
+    }
+
+    public boolean isBanned(String menu) {
+        return bannedMenus.contains(menu);
+    }
+
+    public boolean isRecommend(String menu) {
+        return recommendedMenus.contains(menu);
+    }
 }
