@@ -10,4 +10,10 @@ public class Validator {
             throw new IllegalArgumentException(ErrorMessage.INVALID_COACH_COUNT.getMessage());
         }
     }
+
+    public static void validateBannedMenuSize(List<String> menus) {
+        if (menus.size() > 2) {
+            throw new IllegalArgumentException(ErrorMessage.INVALID_MENU_SIZE.getMessage());
+        }
+    }
 }

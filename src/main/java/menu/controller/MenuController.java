@@ -38,6 +38,7 @@ public class MenuController {
         while (true) {
             try {
                 String input = inputView.inputCoachBannedMenu(coach.getName());
+                menuService.saveBannedMenu(coach, input);
                 return;
             } catch (IllegalArgumentException exception) {
                 outputView.printError(exception.getMessage());

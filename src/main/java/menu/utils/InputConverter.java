@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 public class InputConverter {
     public static final String COMMA_DELIMITER = ",";
-    public static List<String> convertInputToCoachNames(String input) {
+    public static List<String> convertInputToNames(String input) {
         return Arrays.stream(input.split(COMMA_DELIMITER))
                 .map(String::trim)
                 .collect(Collectors.toList());

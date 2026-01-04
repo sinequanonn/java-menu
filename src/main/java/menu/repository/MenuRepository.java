@@ -10,4 +10,13 @@ public class MenuRepository {
     public void saveMenus(String category, List<String> menus) {
         menuMap.put(category, menus);
     }
+
+    public boolean existMenu(String name) {
+        for (List<String> menus : menuMap.values()) {
+            if (menus.contains(name)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

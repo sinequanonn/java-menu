@@ -18,9 +18,17 @@ public class Coach {
         this.name = name;
     }
 
+    public String getName() {
+        return name;
+    }
+
     private void validate(String name) {
         if (name.length() < MIN_NAME_LENGTH || name.length() > MAX_NAME_LENGTH) {
             throw new IllegalArgumentException(ErrorMessage.INVALID_COACH_NAME.getMessage());
         }
+    }
+
+    public void addBannedMenu(String name) {
+        bannedMenus.add(name);
     }
 }

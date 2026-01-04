@@ -1,7 +1,7 @@
 package menu.service;
 
-import camp.nextstep.edu.missionutils.Randoms;
 import menu.domain.Coach;
+import menu.exception.ErrorMessage;
 import menu.repository.MenuRepository;
 import menu.repository.ResultRepository;
 import menu.utils.InputConverter;
@@ -22,7 +22,7 @@ public class MenuService {
     }
 
     public void saveCoaches(String input) {
-        List<String> coachNames = InputConverter.convertInputToCoachNames(input);
+        List<String> coachNames = InputConverter.convertInputToNames(input);
         Validator.validateCoachCount(coachNames);
         List<Coach> coaches = new ArrayList<>();
         for (String name : coachNames) {
@@ -43,4 +43,19 @@ public class MenuService {
         return resultRepository.findAllCoaches();
     }
 
+    public void saveBannedMenu(Coach coach, String input) {
+        List<String> menus = InputConverter.convertInputToNames(input);
+        if (menus.isEmpty() || menus.get(0).isBlank()) {
+            return;
+        }
+        Validator.validateBannedMenuSize(menus);
+        for (String menuName : menus) {
+            if (!menuRepository.existMenu(menuName)) {
+                throw new IllegalArgumentException(ErrorMessage.NOT_FOUND_MENU.getMessage());
+            }
+        }
+        for (String menu : menus) {
+            coach.addBannedMenu(menu);
+        }
+    }
 }
