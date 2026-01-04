@@ -26,4 +26,8 @@ public class ResultRepository {
                 .filter(name -> name.equals(category))
                 .count() >= 2;
     }
+
+    public List<String> findCategories() {
+        return categories;
+    }
 }

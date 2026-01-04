@@ -86,4 +86,8 @@ public class MenuService {
             }
         }
     }
+
+    public List<String> findResultCategories() {
+        return resultRepository.findCategories();
+    }
 }

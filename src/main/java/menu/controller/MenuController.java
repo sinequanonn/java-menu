@@ -26,6 +26,18 @@ public class MenuController {
         saveCoachNames();
         saveCoachBannedMenus();
         processMenuRecommendation();
+
+        printResultStatus();
+    }
+
+    private void printResultStatus() {
+        outputView.printDay();
+        outputView.printCategories(menuService.findResultCategories());
+        List<Coach> coaches = menuService.findAllCoaches();
+        for (Coach coach : coaches) {
+            outputView.printCoachRecommendMenus(coach.getName(), coach.getRecommendedMenus());
+        }
+        outputView.printSuccessMessage();
     }
 
     private void processMenuRecommendation() {

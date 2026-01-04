@@ -28,6 +28,10 @@ public class Coach {
         }
     }
 
+    public List<String> getRecommendedMenus() {
+        return recommendedMenus;
+    }
+
     public void addBannedMenu(String name) {
         bannedMenus.add(name);
     }
