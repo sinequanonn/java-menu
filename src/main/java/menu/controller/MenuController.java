@@ -28,7 +28,7 @@ public class MenuController {
         while (true) {
             try {
                 String coaches = inputView.inputCoachNames();
-                MenuService.saveCoaches(coaches);
+                menuService.saveCoaches(coaches);
                 return;
             } catch (IllegalArgumentException exception) {
                 outputView.printError(exception.getMessage());

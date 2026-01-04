@@ -10,7 +10,12 @@ public class InputView {
     }
 
     public String inputCoachNames() {
+        printEmptyLine();
         System.out.println(INPUT_COACHES);
         return Console.readLine();
+    }
+
+    public void printEmptyLine() {
+        System.out.println();
     }
 }

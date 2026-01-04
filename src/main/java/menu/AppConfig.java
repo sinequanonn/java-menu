@@ -2,6 +2,7 @@ package menu;
 
 import menu.controller.MenuController;
 import menu.repository.MenuRepository;
+import menu.repository.ResultRepository;
 import menu.service.MenuService;
 import menu.view.InputView;
 import menu.view.OutputView;
@@ -28,7 +29,9 @@ public class AppConfig {
 
     public MenuService xService() {
         if (menuService == null) {
-            menuService = new MenuService(new MenuRepository());
+            menuService = new MenuService(
+                    new MenuRepository(),
+                    new ResultRepository());
         }
         return menuService;
     }

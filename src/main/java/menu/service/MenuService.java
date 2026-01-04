@@ -1,21 +1,34 @@
 package menu.service;
 
 import camp.nextstep.edu.missionutils.Randoms;
+import menu.domain.Coach;
 import menu.repository.MenuRepository;
+import menu.repository.ResultRepository;
+import menu.utils.InputConverter;
+import menu.utils.Validator;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MenuService {
-    private List<String> categories = List.of("일식", "한식", "중식", "아시안", "양식");
+    private static final List<String> categories = List.of("일식", "한식", "중식", "아시안", "양식");
 
     private final MenuRepository menuRepository;
+    private final ResultRepository resultRepository;
 
-    public MenuService(MenuRepository menuRepository) {
+    public MenuService(MenuRepository menuRepository, ResultRepository resultRepository) {
         this.menuRepository = menuRepository;
+        this.resultRepository = resultRepository;
     }
 
-    public static void saveCoaches(String input) {
-
+    public void saveCoaches(String input) {
+        List<String> coachNames = InputConverter.convertInputToCoachNames(input);
+        Validator.validateCoachCount(coachNames);
+        List<Coach> coaches = new ArrayList<>();
+        for (String name : coachNames) {
+            coaches.add(new Coach(name));
+        }
+        resultRepository.saveCoaches(coaches);
     }
 
     public void initMenus() {
