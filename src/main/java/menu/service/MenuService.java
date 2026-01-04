@@ -1,6 +1,7 @@
 package menu.service;
 
 import menu.domain.Coach;
+import menu.domain.RandomGenerator;
 import menu.exception.ErrorMessage;
 import menu.repository.MenuRepository;
 import menu.repository.ResultRepository;
@@ -15,10 +16,12 @@ public class MenuService {
 
     private final MenuRepository menuRepository;
     private final ResultRepository resultRepository;
+    private final RandomGenerator generator;
 
-    public MenuService(MenuRepository menuRepository, ResultRepository resultRepository) {
+    public MenuService(MenuRepository menuRepository, ResultRepository resultRepository, RandomGenerator generator) {
         this.menuRepository = menuRepository;
         this.resultRepository = resultRepository;
+        this.generator = generator;
     }
 
     public void saveCoaches(String input) {
@@ -57,5 +60,19 @@ public class MenuService {
         for (String menu : menus) {
             coach.addBannedMenu(menu);
         }
+    }
+
+    public String generateRandomCategory() {
+        return generator.generateCategory(categories);
+    }
+
+    public void validateDuplicatedCategory(String category) {
+        if (resultRepository.validateDuplicatedCategory(category)) {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    public void saveCategory(String category) {
+        resultRepository.addCategory(category);
     }
 }

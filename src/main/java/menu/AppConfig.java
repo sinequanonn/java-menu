@@ -1,6 +1,7 @@
 package menu;
 
 import menu.controller.MenuController;
+import menu.domain.RandomGenerator;
 import menu.repository.MenuRepository;
 import menu.repository.ResultRepository;
 import menu.service.MenuService;
@@ -27,18 +28,19 @@ public class AppConfig {
         return outputView;
     }
 
-    public MenuService xService() {
+    public MenuService menuService() {
         if (menuService == null) {
             menuService = new MenuService(
                     new MenuRepository(),
-                    new ResultRepository());
+                    new ResultRepository(),
+                    new RandomGenerator());
         }
         return menuService;
     }
 
-    public MenuController xController() {
+    public MenuController menuController() {
         if (menuController == null) {
-            menuController = new MenuController(inputView(), outputView(), xService());
+            menuController = new MenuController(inputView(), outputView(), menuService());
         }
         return menuController;
     }

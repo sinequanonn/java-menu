@@ -25,6 +25,24 @@ public class MenuController {
 
         inputCoachNames();
         inputCoachBannedMenus();
+        processMenuRecommendation();
+    }
+
+    private void processMenuRecommendation() {
+        String category = generateRandomCategory();
+
+    }
+
+    private String generateRandomCategory() {
+        while (true) {
+            try {
+                String category = menuService.generateRandomCategory();
+                menuService.validateDuplicatedCategory(category);
+                menuService.saveCategory(category);
+                return category;
+            } catch (IllegalArgumentException ignored) {
+            }
+        }
     }
 
     private void inputCoachBannedMenus() {

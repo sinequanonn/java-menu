@@ -16,4 +16,14 @@ public class ResultRepository {
     public List<Coach> findAllCoaches() {
         return coaches;
     }
+
+    public void addCategory(String category) {
+        categories.add(category);
+    }
+
+    public boolean validateDuplicatedCategory(String category) {
+        return categories.stream()
+                .filter(name -> name.equals(category))
+                .count() >= 2;
+    }
 }
